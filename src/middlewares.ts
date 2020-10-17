@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction, Handler } from 'express'
 import { recoverInformation, Payload } from './util'
 /**
+ * * Verifica que el usuario tenga el token o que no haya expirado
+ * @function checkUserAuthenticated
  * 
- * @param req 
- * @param res 
- * @param next 
+ * @param req Express request
+ * @param res Express response
+ * @param next Express next
  */
 export function checkUserAuthenticated(req: Request, res: Response, next: NextFunction) {
     try {
@@ -21,6 +23,14 @@ export function checkUserAuthenticated(req: Request, res: Response, next: NextFu
     }
 }
 
+/**
+ * Verifica que el usuario no tenga el token o que haya expirado
+ * @function checkUserNotAuthenticated 
+ *
+ * @param req Express request
+ * @param res Express response
+ * @param next Express next
+ */
 export function checkUserNotAuthenticated(req: Request, res: Response, next: NextFunction) {
     try {
         let token = req.headers.authorization as string;
