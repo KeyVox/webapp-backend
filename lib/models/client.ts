@@ -9,7 +9,7 @@ const ClientSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    fileId: {
+    fileID: {
         type: mongoose.Types.ObjectId,
         required: false
     }
