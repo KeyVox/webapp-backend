@@ -10,6 +10,7 @@ app.get('/', function (req, res) {
 app.listen(6969, function () {
     console.log('Server bootstrap 2');
 });
+
 mongoose.connect('mongodb:/localhost:27017/keyvox', {
     useCreateIndex: true,
     useNewUrlParser: true,
