@@ -8,7 +8,8 @@ const CallSchema: Schema = new Schema({
     status: {
         type: Number,
         required: true,
-        enum: [0, 1, 2, 3]
+        enum: [0, 1, 2, 3],
+        default: 0
     },
     phoneNumber: {
         type: String,
