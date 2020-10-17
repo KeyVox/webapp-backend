@@ -5,20 +5,25 @@ const ClientSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    Nombre: {
+    name: {
         type: String,
         required: true,
     },
     fileID: {
         type: mongoose.Types.ObjectId,
         required: false
+    },
+    phoneNumber: {
+        type: String,
+        required:true
     }
 })
 
 export interface IClient extends Document {
     _id: String;
-    Nombre: String;
+    name: String;
     fileID: String;
+    phoneNumber: String;
 }
 
 export default mongoose.model<IClient>('clients', ClientSchema)

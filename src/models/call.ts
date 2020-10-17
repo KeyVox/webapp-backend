@@ -5,6 +5,19 @@ const CallSchema: Schema = new Schema({
         type: mongoose.Types.ObjectId,
         required: true,
     },
+    identificationRequest: {
+        type: mongoose.Types.ObjectId,
+        required: false
+    },
+    enrollRequest: {
+        type: mongoose.Types.ObjectId,
+        required: false
+    },
+    type:{
+        type: Number,
+        required: true,
+        enum: [0,1]
+    },
     status: {
         type: Number,
         required: true,
@@ -30,7 +43,9 @@ export interface ICall extends Document {
     status: Number;
     phoneNumber: String;
     dateInitiated: Date;
-    dateTerminated: Date
+    dateTerminated: Date;
+    identificationRequest: mongoose.Types.ObjectId;
+    enrollRequest: mongoose.Types.ObjectId;
 }
 
 export default mongoose.model<ICall>('calls', CallSchema)
