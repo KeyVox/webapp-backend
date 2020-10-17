@@ -26,8 +26,9 @@ const ClientSchema: Schema = new Schema({
 export interface IClient extends Document {
     username: String;
     password: String;
-    API_KEY: String;
     name: String;
+    PUBLIC_KEY: String;
+    SECRET_KEY: String;
 }
 
 export default mongoose.model<IClient>('clients', ClientSchema)

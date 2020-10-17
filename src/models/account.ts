@@ -5,6 +5,10 @@ const AccountSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    idAccount: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
     name: {
         type: String,
         required: true,
@@ -21,6 +25,7 @@ const AccountSchema: Schema = new Schema({
 
 export interface IAccount extends Document {
     _id: String;
+    idAccount: mongoose.Types.ObjectId;
     name: String;
     fileID: String;
     phoneNumber: String;

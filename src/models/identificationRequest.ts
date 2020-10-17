@@ -1,42 +1,36 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 const IdentificationRequestSchema: Schema = new Schema({
-    idClient: {
+    idAccount: {
         type: mongoose.Types.ObjectId,
         required: true
-    },
-    type:{
-        type: Number,
-        required: true,
-        enum: [0,1]
     },
     idActivationWord: {
         type: mongoose.Types.ObjectId,
         required: true
     },
-    date:{
-        type: Number,
+    source: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
         required: true,
-        enum: [0,1]
+        default: Date.now
     },
     status: {
         type: Number,
         required: true,
-        enum: [0, 1, 2, 3]
-    }, 
-    site: {
-        type: String,
-        required: false
+        enum: [0, 1, 2] //0 Pendiente, 1 error, 2 ok
     }
 })
 
 export interface IIdentificationRequest extends Document {
-    idClient: mongoose.Types.ObjectId;
+    idAccount: mongoose.Types.ObjectId;
+    idActivationWord: mongoose.Types.ObjectId;
+    source: String;
     date: Date;
     status: Number;
-    type: Number;
-    idActivationWord: mongoose.Types.ObjectId;
-    site: String;
 }
 
 export default mongoose.model<IIdentificationRequest>('identificationRequests', IdentificationRequestSchema)

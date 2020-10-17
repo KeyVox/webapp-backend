@@ -1,32 +1,18 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 const CallSchema: Schema = new Schema({
-    idClient: {
+    idAccount: {
         type: mongoose.Types.ObjectId,
         required: true,
     },
-    identificationRequest: {
+    idIdentificationRequest: {
         type: mongoose.Types.ObjectId,
         required: false
-    },
-    enrollRequest: {
-        type: mongoose.Types.ObjectId,
-        required: false
-    },
-    type:{
-        type: Number,
-        required: true,
-        enum: [0,1]
     },
     status: {
         type: Number,
         required: true,
-        enum: [0, 1, 2, 3],
         default: 0
-    },
-    phoneNumber: {
-        type: String,
-        required: true
     },
     dateInitiated: {
         type: Date,
@@ -40,13 +26,11 @@ const CallSchema: Schema = new Schema({
 })
 
 export interface ICall extends Document {
-    idClient: mongoose.Types.ObjectId;
+    idAccount: mongoose.Types.ObjectId;
+    idIdentificationRequest: mongoose.Types.ObjectId;
     status: Number;
-    phoneNumber: String;
     dateInitiated: Date;
     dateTerminated: Date;
-    identificationRequest: mongoose.Types.ObjectId;
-    enrollRequest: mongoose.Types.ObjectId;
 }
 
 export default mongoose.model<ICall>('calls', CallSchema)
