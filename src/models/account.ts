@@ -15,7 +15,8 @@ const AccountSchema: Schema = new Schema({
     },
     fileID: {
         type: mongoose.Types.ObjectId,
-        required: false
+        required: false,
+        default: null
     },
     phoneNumber: {
         type: String,

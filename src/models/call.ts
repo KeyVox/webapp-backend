@@ -7,7 +7,8 @@ const CallSchema: Schema = new Schema({
     },
     idIdentificationRequest: {
         type: mongoose.Types.ObjectId,
-        required: false
+        required: false,
+        default: null
     },
     status: {
         type: Number,
@@ -21,7 +22,8 @@ const CallSchema: Schema = new Schema({
     },
     dateTerminated: {
         type: Date,
-        required: false
+        required: false,
+        default: null
     }
 })
 
