@@ -25,6 +25,11 @@ const IdentificationRequestSchema: Schema = new Schema({
         type: Number,
         required: true,
         enum: [0, 1, 2] //0 Pendiente, 1 error, 2 ok
+    },
+    idRecording: {
+        type: mongoose.Types.ObjectId,
+        required: false,
+        default: null
     }
 })
 
@@ -34,6 +39,7 @@ export interface IIdentificationRequest extends Document {
     source: String;
     date: Date;
     status: Number;
+    idRecording: mongoose.Types.ObjectId | null;
 }
 
 export default mongoose.model<IIdentificationRequest>('identificationRequests', IdentificationRequestSchema)

@@ -3,7 +3,8 @@ import { IActivationWord } from '../../models/activationWord'
 import FileModel from '../../models/files'
 import express from 'express'
 import { checkUserAuthenticated } from '../../middlewares'
-import { upload } from '../../util'
+import { upload, uploadFile } from '../../util'
+import identificationRequest from '../../models/identificationRequest'
 const router = express.Router()
 interface IdentificationRequestData {
     idAccount: String;
@@ -11,25 +12,29 @@ interface IdentificationRequestData {
     source: String;
     date: Date;
     status: Number;
+    idRecording: String;
 }
 
 router.use(checkUserAuthenticated)
-router.post("/verifyIdentity", upload.single("record"), (req, res) => {
-    IdentificationRequestModel.findById(req.body.id).populate("idActivationWord").then(IdenDoc => {
-        if (IdenDoc) {
-            let idHotWord = (IdenDoc.idActivationWord as IActivationWord)._id;
-            FileModel.findById(idHotWord).then(docFile => {
-
-            }).catch((errFile: Error) => {
-
+router.post("/verifyIdentity", upload.single("record"), async (req, res) => {
+    try {
+        let idFile = await uploadFile(req)
+        identificationRequest.findByIdAndUpdate(req.body.id, {
+            $set: {
+                idRecording: idFile
+            }
+        }).then(identRequest => {
+            res.status(200).send({
+                value: identRequest
             })
-        }
-        else {
+        }).catch((err: Error) => {
+            res.status(200).end(err.message)
+        })
 
-        }
-    }).catch((errIde: Error) => {
-
-    })
+    }
+    catch (err) {
+        res.status(200).end(err)
+    }
 })
 
 router.post("/addIdentificationRequest", (req, res) => {
