@@ -54,9 +54,22 @@ export async function updateAccount(_id: string, data: AccountData) {
 		if (account) {
 			account.name = data.name;
 			account.idAccount = Types.ObjectId(data.idAccount);
-			account.fileID = data.fileID
+			account.fileID = data.fileID;
 		}
 		return null;
+	} catch (err) {
+		console.log(err);
+		throw {
+			status: 'Error',
+			code: 500,
+			description: 'Error al realizar la consulta',
+		};
+	}
+}
+
+export async function deleteAccount(_id: string) {
+	try {
+		return await AccountModel.deleteOne({ _id });
 	} catch (err) {
 		console.log(err);
 		throw {
