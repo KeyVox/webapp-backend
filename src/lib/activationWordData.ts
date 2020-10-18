@@ -7,13 +7,6 @@
 */
 import ActivationWordModel, { IActivationWord } from '../models/activationWord';
 import mongoose from 'mongoose';
-export interface ActivationWordData {
-    idAccount: mongoose.Types.ObjectId;
-    name: String;
-    trainingModel: mongoose.Types.ObjectId;
-    status: Number;
-    sample: mongoose.Types.ObjectId[];
-}
 /**
  * 
  * @param _id {mongoose.Types.ObjectId} ID de la palabra de activacion
@@ -30,13 +23,7 @@ export async function getActivationWordById(_id: mongoose.Types.ObjectId): Promi
 
 export async function createActivationWord(data: ActivationWordData) {
     try {
-        return await new ActivationWordModel({
-            idAccount: data.idAccount,
-            name: data.name,
-            trainingModel: null,
-            status: 0,
-            samples: data.sample
-        }).save();
+        return await new ActivationWordModel(data).save();
     } catch (error) {
         throw { status: "Error", code: 500, description: "Error al insertar la solicitud de identificacion" }
     }
@@ -44,9 +31,7 @@ export async function createActivationWord(data: ActivationWordData) {
 
 export async function getActivationWordsByIdAccount(idAccount: mongoose.Types.ObjectId) {
     try {
-        return await ActivationWordModel.find({
-            idAccount: idAccount
-        })
+        return await ActivationWordModel.find(idAccount);
     } catch (error) {
         throw { status: "Error", code: 500, description: "Error al conectar a la base de datos" }
     }
@@ -59,4 +44,10 @@ export async function deleteActivationWord(_id: mongoose.Types.ObjectId) {
         throw { status: "Error", code: 500, description: "Error al conectar a la base de datos" }
     }
 }
-
+export interface ActivationWordData {
+    idAccount: mongoose.Types.ObjectId;
+    name: String;
+    trainingModel: mongoose.Types.ObjectId;
+    status: Number;
+    samples: mongoose.Types.ObjectId[];
+}

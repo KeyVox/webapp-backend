@@ -3,10 +3,10 @@ import AccountModel from '../models/account';
 import { Types } from 'mongoose';
 
 export interface AccountData {
-	idAccount: string;
-	name: string;
-	fileID: string | null;
-	phoneNumber: string;
+	idAccount: Types.ObjectId;
+    idPhoto: Types.ObjectId | null;
+    name: String;
+    phoneNumber: String;
 }
 
 export async function getAccountById(_id: string) {
@@ -50,13 +50,7 @@ export async function createAccount(data: AccountData) {
 
 export async function updateAccount(_id: string, data: AccountData) {
 	try {
-		const account = await getAccountById(_id);
-		if (account) {
-			account.name = data.name;
-			account.idAccount = Types.ObjectId(data.idAccount);
-			account.fileID = data.fileID;
-		}
-		return null;
+		return await getAccountById(_id);		
 	} catch (err) {
 		console.log(err);
 		throw {

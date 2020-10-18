@@ -1,4 +1,3 @@
-import { Mongoose } from 'mongoose';
 /**
  * @author René Payán Téllez
  * @email payantellez1g@hotmail.com
@@ -12,9 +11,9 @@ import mongoose from 'mongoose'
  * Esta funcion busca y retorna retorna una llamada por su _id
  * @function getIdentificationRequestById
  * @param {String} [_id] _id de la solicitud de identificacion a buscar  
- * @return {ICall | null} Objeto de tipo "IIdentificationRequest" si se encontro en la base, en cualquier otro caso NULL    
+ * @return {Promise< IIdentificationRequest | null >} Objeto de tipo promesa de "IIdentificationRequest" si se encontro en la base, en cualquier otro caso NULL
 */
-export async function getIdentificationRequestById(_id: String): Promise< IIdentificationRequest | null > {
+export async function getIdentificationRequestById(_id: mongoose.Types.ObjectId): Promise< IIdentificationRequest | null > {
     try{
         return await IdentificationRequestModel.findOne({_id});
     }catch(error){
@@ -25,11 +24,11 @@ export async function getIdentificationRequestById(_id: String): Promise< IIdent
 /**
  * Esta funcion crea una solicitud de identificacion, desde sus parametros
  * @function createIdentificationRequest
- * @param {mongoose.Types.ObjectId} [idAccount] _id de la cuenta 
+ * @param {mongoose.Types.ObjectId} [idAccount] _id de la cuenta
  * @param {mongoose.Types.ObjectId} [idActivationWord] _id de la palabra de activacion de la solicitud
  * @param {String} [source] El sitio de la solicitud
  * @param {Date} [date] La fecha de la solicitud de informacion
- * @param {Number} [status] El estatus de la solicitud  
+ * @param {Number} [status] El estatus de la solicitud
  */
 export async function createIdentificationRequest(data: IdentificationRequestData) {
     try{        
@@ -66,9 +65,35 @@ export async function deleteIdentificationRequest(_id: mongoose.Types.ObjectId){
         throw {status:"Error", code: 500, description:"Error al actualizar la solicitud de identificacion"}
     }
 }
+
+/**
+ * Esta funcion busca y retorna todas las solicitudes de identificacion de una cuenta
+ * @function listIdentificationRequestByAccount
+ * @param {mongoose.Types.ObjectId} [idAccount] _id de la cuenta para buscar  
+*/
+export async function listIdentificationRequestByAccount(idAccount: mongoose.Types.ObjectId) {
+    try{
+        return await IdentificationRequestModel.find(idAccount);
+    }catch(error){
+        throw {status:"Error", code:500, description:"Error al conectar a la base de datos"};
+    }
+}
+
+/**
+ * Esta funcion busca y retorna todas las solicitudes de identificacion
+ * @function listIdentificationRequestByAccount
+*/
+export async function listIdentificationRequest() {
+    try{
+        return await IdentificationRequestModel.find();
+    }catch(error){
+        throw {status:"Error", code:500, description:"Error al conectar a la base de datos"};
+    }
+}
+
 export interface IdentificationRequestData{
-    idAccount: String;
-    idActivationWord: String;
+    idAccount: mongoose.Types.ObjectId;
+    idActivationWord: mongoose.Types.ObjectId;
     date: Date;
     source: String;
     status: Number;

@@ -1,28 +1,15 @@
-export interface ClientData {
-	username: String;
-	password: String;
-	name: String;
-	PUBLIC_KEY: String;
-	SECRET_KEY: string;
-}
-
 /**
  * @author René Payán Téllez
  * @email payantellez1g@hotmail.com
  * @create date 2020-10-17 03:00am
  * @modify date 2020-10-17 03:55am
  * @desc [Este archivo tiene todas las funciones relacionadas al modelo de las llamadas en la base de datos]
-<<<<<<< HEAD
  */
-import ClientModel from '../models/client';
-=======
-*/
 import ClientModel, { IClient } from '../models/client';
->>>>>>> 0f4cbb93f5b2e53c4332d3fac81d3b1b27c003b3
 /**
  * Esta funcion busca y retorna retorna un cliente por su _id
  * @param {String} [_id] _id de la llamada a buscar
- * @return {ICall | null} Objeto de tipo "IClient" si se encontro en la base, en cualquier otro caso NULL
+ * @return {ICall | null} Retorna una promesa de la busqueda en la base de datos
  */
 export async function getClientById(_id: String) {
 	try {
@@ -80,4 +67,11 @@ export async function deleteClient(_id: String) {
 			description: 'Error al ejecutar la consulta',
 		};
 	}
+}
+export interface ClientData {
+	username: String;
+	password: String;
+	name: String;
+	publicKey: String;
+	secretKey: string;
 }

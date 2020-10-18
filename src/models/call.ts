@@ -29,10 +29,10 @@ const CallSchema: Schema = new Schema({
 
 export interface ICall extends Document {
     idAccount: mongoose.Types.ObjectId;
-    idIdentificationRequest: mongoose.Types.ObjectId;
+    idIdentificationRequest: mongoose.Types.ObjectId | null;
     status: Number;
     dateInitiated: Date;
-    dateTerminated: Date;
+    dateTerminated: Date | null;
 }
 
 export default mongoose.model<ICall>('calls', CallSchema)
