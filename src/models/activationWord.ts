@@ -31,6 +31,7 @@ const ActivationWordSchema: Schema = new Schema({
 })
 
 export interface IActivationWord extends Document {
+    _id: mongoose.Types.ObjectId;
     idAccount: mongoose.Types.ObjectId;
     name: String;
     trainingModel: mongoose.Types.ObjectId | null;
