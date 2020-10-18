@@ -45,9 +45,9 @@ export async function uploadFile(req: Request) {
  * @property {string} KEY PUBLIC_KEY o PRIVATE_KEY 
  */
 export interface Payload {
-    _id: string;
+    _id: String;
     time: number;
-    KEY: string;
+    KEY: String;
 }
 
 /**
@@ -59,7 +59,7 @@ export interface Payload {
  * 
  * @returns {string} Token web para las peticiones
  */
-export function createToken(id: string, KEY: string): string {
+export function createToken(id: String, KEY: String): String {
     let payload: Payload = {
         _id: id,
         time: Date.now(),
