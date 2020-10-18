@@ -25,25 +25,51 @@ export async function getIdentificationRequestById(_id: String): Promise< IIdent
 /**
  * Esta funcion crea una solicitud de identificacion, desde sus parametros
  * @function createIdentificationRequest
- * @param {mongoose.Types.ObjectId} [idClient] _id del cliente
- * @param {Number} [type] El tipo de la identification request (0 enroll, 1 identification)
+ * @param {mongoose.Types.ObjectId} [idAccount] _id de la cuenta 
  * @param {mongoose.Types.ObjectId} [idActivationWord] _id de la palabra de activacion de la solicitud
+ * @param {String} [source] El sitio de la solicitud
  * @param {Date} [date] La fecha de la solicitud de informacion
- * @param {Number} [status] El estatus de la solicitud
- * @param {String | null} [site] El sitio de la solicitud
- * @return {IIdentificationRequest  | null } Objeto de tipo "IIdentificationRequest" con el objeto insertado o nulo en caso de no insertarse
+ * @param {Number} [status] El estatus de la solicitud  
  */
-export async function createIdentificationRequest(idClient: mongoose.Types.ObjectId, type: Number, idActivationWord: mongoose.Types.ObjectId, date: Date, status: Number, site:String | null) {
-    try{
-        return await new IdentificationRequestModel({
-            idClient,
-            type,
-            idActivationWord,
-            date, 
-            status, 
-            site
-        }).save();
+export async function createIdentificationRequest(data: IdentificationRequestData) {
+    try{        
+        return await new IdentificationRequestModel(data).save();
     }catch(error){
+        console.log(error);
         throw {status:"Error", code: 500, description:"Error al insertar la solicitud de identificacion"}
     }
 }
+/**
+ * Esta funcion actualiza
+ * @function updateIdentificationRequest
+ * @param {mongoose.Types.ObjectId} [_id] _id de la solicitud de identification
+ * @param {IdentificationRequestData} [data] datos a actualizar 
+ */
+export async function updateIdentificationRequest(_id: mongoose.Types.ObjectId, data: IdentificationRequestData){
+    try{
+        return await IdentificationRequestModel.updateOne(_id, {$set:{data}});
+    }catch(error){
+        console.log(error);
+        throw {status:"Error", code: 500, description:"Error al actualizar la solicitud de identificacion"}
+    }
+}
+/**
+ * Esta funcion elimina
+ * @function updateIdentificationRequest
+ * @param {mongoose.Types.ObjectId} [_id] _id de la solicitud de identification 
+ */
+export async function deleteIdentificationRequest(_id: mongoose.Types.ObjectId){
+    try{
+        return await IdentificationRequestModel.deleteOne(_id);
+    }catch(error){
+        console.log(error);
+        throw {status:"Error", code: 500, description:"Error al actualizar la solicitud de identificacion"}
+    }
+}
+export interface IdentificationRequestData{
+    idAccount: String;
+    idActivationWord: String;
+    date: Date;
+    source: String;
+    status: Number;
+};

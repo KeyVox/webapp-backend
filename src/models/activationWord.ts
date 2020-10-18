@@ -18,9 +18,10 @@ const ActivationWordSchema: Schema = new Schema({
         required: true,
         enum: [0, 1, 2] //0 pendiente, 1 error, 2 ok 
     },
-    samples:[{
+    samples: [{
         type: mongoose.Types.ObjectId,
-        required: true
+        required: false,
+        default: null
     }]
 
 })
@@ -30,7 +31,7 @@ export interface IActivationWord extends Document {
     name: String;
     trainingModel: mongoose.Types.ObjectId;
     status: Number;
-    samples: [mongoose.Types.ObjectId];
+    samples: mongoose.Types.ObjectId[];
 }
 
 export default mongoose.model<IActivationWord>('activationWords', ActivationWordSchema)
