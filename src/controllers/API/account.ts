@@ -42,7 +42,7 @@ router.post("/listAccountsByClient", (req, res) => {
     try {
         let payload = recoverInformation(req.headers.authorization as string)
         AccountModel.find({
-            idClient: payload._id
+            idClient: payload._id as string
         }).then(values => {
             res.status(200).send({ value: values })
         }).catch((err: Error) => {
