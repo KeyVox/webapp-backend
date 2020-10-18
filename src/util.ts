@@ -20,7 +20,7 @@ let storage = multer.diskStorage({
 export let upload = multer({ storage: storage });
 
 export async function uploadFile(req: Request) {
-    const conn = mongoose.createConnection(`mongodb:${database.user}:${database.password}@${database.IP}:${database.port}/?authSource=${database.name}`, {
+    const conn = mongoose.createConnection(`mongodb:${database.user}:${database.password}@${database.IP}:${database.port}/${database.name}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

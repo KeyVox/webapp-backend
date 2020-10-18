@@ -17,7 +17,7 @@ app.listen(6969, function () {
 });
 
 mongoose.connect(
-	`mongodb://${database.user}:${database.password}@${database.IP}:${database.port}/?authSource=${database.name}`,
+	`mongodb://${database.user}:${database.password}@${database.IP}:${database.port}/${database.name}`,
 	{
 		useCreateIndex: true,
 		useNewUrlParser: true,
