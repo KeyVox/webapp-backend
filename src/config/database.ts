@@ -1,7 +1,7 @@
 export default {
-    IP: "127.0.0.1",
+    IP: "104.238.138.234",
     user: "test",
     password: "test",
-    port: "test",
+    port: "27017",
     name: "keyvox-test"
 }

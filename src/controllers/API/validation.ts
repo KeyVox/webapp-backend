@@ -17,6 +17,8 @@ router.post("/login", checkUserNotAuthenticated, async (req, res) => {
 				res.status(200).send({
 					token: createToken(doc._id, doc.secretKey)
 				})
+			} else {
+				res.status(404).end('No se pudo autenticar')
 			}
 		}
 		else {
@@ -28,6 +30,8 @@ router.post("/login", checkUserNotAuthenticated, async (req, res) => {
 					res.status(200).send({
 						token: createToken(doc._id, doc.publicKey)
 					})
+				} else {
+					res.status(404).end('No se pudo autenticar')
 				}
 			} else if (req.body.privateKey) {
 				doc = await ClientModel.findOne({
@@ -37,6 +41,8 @@ router.post("/login", checkUserNotAuthenticated, async (req, res) => {
 					res.status(200).send({
 						token: createToken(doc._id, doc.secretKey)
 					})
+				} else {
+					res.status(404).end('No se pudo autenticar')
 				}
 			}
 		}
