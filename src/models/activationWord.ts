@@ -4,6 +4,7 @@ const ActivationWordSchema: Schema = new Schema({
     idAccount: {
         type: mongoose.Types.ObjectId,
         required: true,
+        ref:'accounts'
     },
     name: {
         type: String,
@@ -12,7 +13,8 @@ const ActivationWordSchema: Schema = new Schema({
     trainingModel: {
         type: mongoose.Types.ObjectId,
         required: false,
-        default: null
+        default: null,
+        ref:'files'
     },
     status: {
         type: Number,
@@ -22,7 +24,8 @@ const ActivationWordSchema: Schema = new Schema({
     },
     samples: [{
         type: mongoose.Types.ObjectId,
-        required: true        
+        required: true,
+        ref:'files'
     }]
 
 })

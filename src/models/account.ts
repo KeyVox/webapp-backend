@@ -3,12 +3,14 @@ import mongoose, { Schema, Document } from 'mongoose'
 const AccountSchema: Schema = new Schema({    
     idAccount: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref:'accounts'        
     },
     idPhoto: {
         type: mongoose.Types.ObjectId,
         required: false,
-        default: null
+        default: null,
+        ref:'files'
     },
     name: {
         type: String,

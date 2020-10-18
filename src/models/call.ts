@@ -1,14 +1,17 @@
 import mongoose, { Schema, Document } from 'mongoose'
+import account from './account'
 
 const CallSchema: Schema = new Schema({
     idAccount: {
         type: mongoose.Types.ObjectId,
         required: true,
+        ref:'accounts'
     },
     idIdentificationRequest: {
         type: mongoose.Types.ObjectId,
         required: false,
-        default: null
+        default: null,
+        ref:'identificationRequests'
     },
     status: {
         type: Number,

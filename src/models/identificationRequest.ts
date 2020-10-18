@@ -3,11 +3,13 @@ import mongoose, { Schema, Document } from 'mongoose'
 const IdentificationRequestSchema: Schema = new Schema({
     idAccount: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref:'account'
     },
     idActivationWord: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref:'activationWords'
     },
     source: {
         type: String,
