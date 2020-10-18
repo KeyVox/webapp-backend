@@ -9,7 +9,7 @@ import ClientModel, { IClient } from '../models/client';
 /**
  * Esta funcion busca y retorna retorna un cliente por su _id
  * @param {String} [_id] _id de la llamada a buscar
- * @return {ICall | null} Objeto de tipo "IClient" si se encontro en la base, en cualquier otro caso NULL
+ * @return {ICall | null} Retorna una promesa de la busqueda en la base de datos
  */
 export async function getClientById(_id: String) {
 	try {
@@ -72,6 +72,6 @@ export interface ClientData {
 	username: String;
 	password: String;
 	name: String;
-	PUBLIC_KEY: String;
-	SECRET_KEY: string;
+	publicKey: String;
+	secretKey: string;
 }

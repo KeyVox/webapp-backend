@@ -1,23 +1,19 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
-const AccountSchema: Schema = new Schema({
-    _id: {
-        type: String,
-        required: true,
-    },
+const AccountSchema: Schema = new Schema({    
     idAccount: {
         type: mongoose.Types.ObjectId,
         required: true
-    },
-    name: {
-        type: String,
-        required: true,
     },
     idPhoto: {
         type: mongoose.Types.ObjectId,
         required: false,
         default: null
     },
+    name: {
+        type: String,
+        required: true,
+    },    
     phoneNumber: {
         type: String,
         required: true
@@ -25,10 +21,9 @@ const AccountSchema: Schema = new Schema({
 })
 
 export interface IAccount extends Document {
-    _id: String;
     idAccount: mongoose.Types.ObjectId;
-    idPhoto: mongoose.Types.ObjectId;
-    fileID: String | null;
+    idPhoto: mongoose.Types.ObjectId | null;
+    name: String;
     phoneNumber: String;
 }
 
