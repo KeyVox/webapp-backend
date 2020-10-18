@@ -15,7 +15,8 @@ const AccountSchema: Schema = new Schema({
     },
     idPhoto: {
         type: mongoose.Types.ObjectId,
-        required: false
+        required: false,
+        default: null
     },
     phoneNumber: {
         type: String,
