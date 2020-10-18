@@ -7,7 +7,7 @@ const AccountSchema: Schema = new Schema({
         ref:'clients'        
     },
     accountNumber:{
-        type: mongoose.Types.ObjectId,
+        type: String,
         required: true        
     },
     idPhoto: {

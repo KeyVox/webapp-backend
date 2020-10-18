@@ -12,6 +12,7 @@ export function checkUserAuthenticated(req: Request, res: Response, next: NextFu
     try {
         let token = req.headers.authorization as string;
         let payload = recoverInformation(token);
+        req.body.idClient = payload._id;
         if (((Date.now() - payload.time) / 1000) > 3600) {
             res.status(403).end("Token expirado")
         }

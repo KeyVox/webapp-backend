@@ -1,4 +1,5 @@
 import express from 'express'
+import { getClientById } from '../../lib/clientData'
 import { checkUserAuthenticated } from '../../middlewares'
 import AccountModel from '../../models/account'
 import { recoverInformation } from '../../util'
@@ -13,7 +14,7 @@ interface AccountData {
 }
 
 router.post('/addAccount', (req, res) => {
-    try {
+    try {        
         let doc = req.body as AccountData;
         (new AccountModel(doc)).save().then(newAccount => {
             res.status(200).send({ value: newAccount })
