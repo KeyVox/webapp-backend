@@ -16,9 +16,12 @@
   "author": "Los Funados",
   "license": "GNU V3",
   "dependencies": {
+    "@types/mime": "^2.0.3",
+    "@types/multer": "^1.4.4",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jwt-simple": "^0.5.6",
+    "mime": "^2.4.6",
     "mongoose": "^5.10.9",
     "multer": "^1.4.2",
     "ts-node-dev": "^1.0.0-pre.65",

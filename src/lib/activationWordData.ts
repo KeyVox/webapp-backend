@@ -59,3 +59,4 @@ export async function deleteActivationWord(_id: mongoose.Types.ObjectId) {
         throw { status: "Error", code: 500, description: "Error al conectar a la base de datos" }
     }
 }
+

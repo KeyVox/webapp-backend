@@ -1,6 +1,41 @@
 import jwt from 'jwt-simple'
 import misc from './config/misc'
+import database from './config/database'
+import mongoose from 'mongoose'
+import multer from 'multer'
+import fs from 'fs'
+import FileModel from './models/files'
+import { Request } from 'express'
+import path from 'path'
+import mime from 'mime'
 
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads")
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname)
+    }
+})
+export let upload = multer({ storage: storage });
+
+export async function uploadFile(req: Request) {
+    const conn = mongoose.createConnection(`mongodb:${database.user}:${database.password}@${database.IP}:${database.port}/?authSource=${database.name}`, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+
+    let obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: mime.getType(path.join(__dirname + '/uploads/' + req.file.filename)),
+            ext: mime.getExtension(path.join(__dirname + '/uploads/' + req.file.filename))
+        }
+    }
+    return (await new FileModel(obj).save())._id
+}
 /**
  * Interfaz usada para la conversion de informacion a token 
  * @interface Payload 
