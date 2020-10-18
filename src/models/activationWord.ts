@@ -9,7 +9,7 @@ const ActivationWordSchema: Schema = new Schema({
         type: String,
         required: true
     },
-    NN: {
+    trainingModel: {
         type: mongoose.Types.ObjectId,
         required: false
     },
@@ -17,15 +17,20 @@ const ActivationWordSchema: Schema = new Schema({
         type: Number,
         required: true,
         enum: [0, 1, 2] //0 pendiente, 1 error, 2 ok 
-    }
+    },
+    samples:[{
+        type: mongoose.Types.ObjectId,
+        required: true
+    }]
 
 })
 
-export interface ICall extends Document {
+export interface IActivationWord extends Document {
     idAccount: mongoose.Types.ObjectId;
     name: String;
-    NN: mongoose.Types.ObjectId;
+    trainingModel: mongoose.Types.ObjectId;
     status: Number;
+    samples: [mongoose.Types.ObjectId];
 }
 
-export default mongoose.model<ICall>('activationWords', ActivationWordSchema)
+export default mongoose.model<IActivationWord>('activationWords', ActivationWordSchema)
