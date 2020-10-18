@@ -8,10 +8,7 @@
 import express, { Request, Response } from 'express'
 import { json } from 'body-parser'
 import mongoose from 'mongoose'
-import {getCallById} from '../../lib/callData'
-import {getClientById} from '../../lib/clientData'
-import {createIdentificationRequest} from '../../lib/identificationRequestData'
-import {getActivationWordById} from '../../lib/activationWordData'
+import { getAccountById } from '../../lib/accountData'
 const app: express.Application = express();
 
 app.post('/requestCall',(req: Request,resp: Response)=>{
@@ -19,9 +16,17 @@ app.post('/requestCall',(req: Request,resp: Response)=>{
 		Aqui se realiza una validación de los parametros iniciales
 	*/
 	let type = req.body.type;
-	let idClient = req.body.idClient;		
+	let idAccount = req.body.idAccount;		
 	let status = 0;
-	getClientById(idClient).then(cliente=>{
+	getAccountById(account=>{
+		if(account){
+			
+		}else{
+			resp.status(404).end({status:"Error",code:404,description:""});
+		}
+	}).catch(errorObtenerAccount=>{
+
+	});
 		if(cliente != null){
 			let dateInitiated = new Date();
 			let dateTerminated = new Date();

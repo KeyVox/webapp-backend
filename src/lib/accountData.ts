@@ -1,15 +1,16 @@
-import AccountModel from '../models/account';
+import AccountModel, {IAccount} from '../models/account';
 
 import { Types } from 'mongoose';
 
 export interface AccountData {
-	idAccount: Types.ObjectId;
+	idClient: Types.ObjectId;
+	accountNumber: String;
     idPhoto: Types.ObjectId | null;
     name: String;
     phoneNumber: String;
 }
 
-export async function getAccountById(_id: string) {
+export async function getAccountById(_id: string):Promise < IAccount | null > {
 	try {
 		return await AccountModel.findOne({ _id });
 	} catch (err) {

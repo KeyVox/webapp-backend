@@ -1,10 +1,14 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 const AccountSchema: Schema = new Schema({    
-    idAccount: {
+    idClient: {
         type: mongoose.Types.ObjectId,
         required: true,
-        ref:'accounts'        
+        ref:'clients'        
+    },
+    accountNumber:{
+        type: mongoose.Types.ObjectId,
+        required: true        
     },
     idPhoto: {
         type: mongoose.Types.ObjectId,
@@ -23,7 +27,8 @@ const AccountSchema: Schema = new Schema({
 })
 
 export interface IAccount extends Document {
-    idAccount: mongoose.Types.ObjectId;
+    idClient: mongoose.Types.ObjectId;
+    accountNumber: String;
     idPhoto: mongoose.Types.ObjectId | null;
     name: String;
     phoneNumber: String;
