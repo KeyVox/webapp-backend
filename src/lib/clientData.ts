@@ -5,7 +5,7 @@
  * @modify date 2020-10-17 03:55am
  * @desc [Este archivo tiene todas las funciones relacionadas al modelo de las llamadas en la base de datos]
 */
-import ClientModel, { IClient } from '../models/account';
+import ClientModel, { IClient } from '../models/client';
 /**
  * Esta funcion busca y retorna retorna un cliente por su _id
  * @param {String} [_id] _id de la llamada a buscar  

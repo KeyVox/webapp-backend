@@ -13,7 +13,7 @@ const AccountSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    fileID: {
+    idPhoto: {
         type: mongoose.Types.ObjectId,
         required: false
     },
@@ -26,7 +26,7 @@ const AccountSchema: Schema = new Schema({
 export interface IAccount extends Document {
     _id: String;
     idAccount: mongoose.Types.ObjectId;
-    name: String;
+    idPhoto: mongoose.Types.ObjectId;
     fileID: String;
     phoneNumber: String;
 }
