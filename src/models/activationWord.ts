@@ -21,11 +21,11 @@ const ActivationWordSchema: Schema = new Schema({
 
 })
 
-export interface ICall extends Document {
+export interface IActivationWord extends Document {
     idAccount: mongoose.Types.ObjectId;
     name: String;
     NN: mongoose.Types.ObjectId;
     status: Number;
 }
 
-export default mongoose.model<ICall>('activationWords', ActivationWordSchema)
+export default mongoose.model<IActivationWord>('activationWords', ActivationWordSchema)
