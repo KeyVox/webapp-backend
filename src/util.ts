@@ -28,7 +28,7 @@ export async function uploadFile(req: Request) {
     let obj = {
         name: req.body.name,
         desc: req.body.desc,
-        img: {
+        value: {
             data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
             contentType: mime.getType(path.join(__dirname + '/uploads/' + req.file.filename)),
             ext: mime.getExtension(path.join(__dirname + '/uploads/' + req.file.filename))
