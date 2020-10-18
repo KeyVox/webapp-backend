@@ -31,6 +31,7 @@ const CallSchema: Schema = new Schema({
 })
 
 export interface ICall extends Document {
+    _id: mongoose.Types.ObjectId;
     idAccount: mongoose.Types.ObjectId;
     idIdentificationRequest: mongoose.Types.ObjectId | null;
     status: Number;

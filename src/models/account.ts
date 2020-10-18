@@ -27,6 +27,7 @@ const AccountSchema: Schema = new Schema({
 })
 
 export interface IAccount extends Document {
+    _id: mongoose.Types.ObjectId;
     idClient: mongoose.Types.ObjectId;
     accountNumber: String;
     idPhoto: mongoose.Types.ObjectId | null;

@@ -30,7 +30,7 @@ export async function getIdentificationRequestById(_id: mongoose.Types.ObjectId)
  * @param {Date} [date] La fecha de la solicitud de informacion
  * @param {Number} [status] El estatus de la solicitud
  */
-export async function createIdentificationRequest(data: IdentificationRequestData) {
+export async function createIdentificationRequest(data: IdentificationRequestData): Promise< IIdentificationRequest | null > {
     try{        
         return await new IdentificationRequestModel(data).save();
     }catch(error){

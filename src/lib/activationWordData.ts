@@ -44,6 +44,14 @@ export async function deleteActivationWord(_id: mongoose.Types.ObjectId) {
         throw { status: "Error", code: 500, description: "Error al conectar a la base de datos" }
     }
 }
+
+export async function getRandomActivationWordByAccount(account: mongoose.Types.ObjectId): Promise<IActivationWord[] | null> {
+    try{
+        return await ActivationWordModel.aggregate([{ $match: { idAccount: account } },{$sample: { size: 1 }}, {$limit:1}]);
+    }catch(error){
+        throw { status: "Error", code: 500, description: "Error al conectar a la base de datos" }
+    }
+}
 export interface ActivationWordData {
     idAccount: mongoose.Types.ObjectId;
     name: String;
