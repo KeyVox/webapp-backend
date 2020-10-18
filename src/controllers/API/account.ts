@@ -16,7 +16,7 @@ router.post('/addAccount', (req, res) => {
     try {
         let doc = req.body as AccountData;
         (new AccountModel(doc)).save().then(newAccount => {
-            res.status(200).send(newAccount)
+            res.status(200).send({ value: newAccount })
         }).catch((err: Error) => {
             res.status(500).end(err.message)
         })
@@ -28,7 +28,7 @@ router.post('/addAccount', (req, res) => {
 router.post('/getAccountByID', (req, res) => {
     try {
         AccountModel.findById(req.body.id).then(acc => {
-            res.status(200).send(acc)
+            res.status(200).send({ value: acc })
         }).catch((err: Error) => {
             res.status(500).end(err.message)
         })
@@ -44,7 +44,7 @@ router.post("/listAccountsByClient", (req, res) => {
         AccountModel.find({
             idClient: payload._id
         }).then(values => {
-            res.status(200).send(values)
+            res.status(200).send({ value: values })
         }).catch((err: Error) => {
             res.status(500).send(err.message)
         })

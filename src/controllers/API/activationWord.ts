@@ -9,7 +9,7 @@ router.post("/getActivationWordsByAccount", (req, res) => {
         ActivatioWordModel.find({
             idAccount: req.body.idAccount
         }).then(values => {
-            res.status(200).send(values)
+            res.status(200).send({ value: values })
         }).catch((err: Error) => {
             res.status(500).end(err.message)
         })
